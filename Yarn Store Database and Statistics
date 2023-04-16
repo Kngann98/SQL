@@ -1,0 +1,51 @@
+--Yarn store inventory analyis
+
+CREATE TABLE yarn (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, color TEXT, weight TEXT, ordered_quantity INTEGER, quantity INTEGER, price INTEGER);
+
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('silk mohair', 'pink', 'lace', 7, 15, 5.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('silk mohair', 'green', 'lace', 2, 0, 5.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('bamboo linen', 'teal', 'sport', 2, 8, 3.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('wool blend', 'tan', 'bulky', 6, 3, 8.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('acrylic', 'rainbow', 'fine', 9, 4, 2.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('silk mohair', 'brown', 'lace', 3, 7, 5.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('cotton', 'white', 'medium', 15, 2, 5.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('cotton', 'blue', 'medium', 1, 4, 5.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('wool blend', 'variegated', 'bulky', 0, 4, 8.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('acrylic', 'yellow', 'fine', 2, 7, 2.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('acrylic', 'grey', 'fine', 1, 5, 2.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('wool blend', 'red', 'bulky', 1, 6, 8.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('wool blend', 'green', 'bulky', 1, 1, 8.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('bamboo linen', 'purple', 'fine', 2, 11, 3.99);
+INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
+    VALUES ('bamboo linen', 'pink', 'fine', 1, 6, 3.99);
+
+--Show individual items, ordered by price
+
+SELECT name, color, weight, price 
+FROM yarn 
+ORDER BY price;
+
+--What is the highest price of a single skein of yarn?
+
+SELECT MAX(price) 
+FROM yarn;
+
+--What yarns need to be ordered to fill shipping requests?
+
+SELECT name, color, weight, quantity-ordered_quantity
+AS yarn_needed 
+FROM yarn WHERE yarn_needed < 0;
