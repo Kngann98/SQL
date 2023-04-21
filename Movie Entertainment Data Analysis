@@ -1,0 +1,84 @@
+--Table of up and coming actors, with age and gender.
+
+CREATE TABLE actors (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, gender TEXT);
+
+INSERT INTO actors (name, age, gender)
+    VALUES ("Daisy Edgar Jones", 24, "female");
+INSERT INTO actors(name, age, gender)
+    VALUES ("Paul Mescal", 27, "male");
+INSERT INTO actors(name, age, gender)
+    VALUES ("Jenna Ortega", 20, "female");
+INSERT INTO actors(name, age, gender)
+    VALUES ("Lola Tung", 20, "female");
+INSERT INTO actors(name, age, gender)
+    VALUES ("Christopher Briney", 25, "male");
+INSERT INTO actors(name, age, gender)
+    VALUES ("Millie Bobby Brown", 19, "female");
+    
+--Table with id, title of TV show/movie and release year of each of the actors
+    
+CREATE TABLE entertainment (movie_id INTEGER, actor_id INTEGER, name TEXT, released INTEGER);
+
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES (1, 1, "Where the Crawdads Sing", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES (2, 1, "Normal People", 2020);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES (3, 1, "Fresh", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (2, 2, "Normal People", 2020);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (4, 2, "Aftersun", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (5, 2, "Carmen", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (6, 3, "Wednesday", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (7, 3, "Scream VI", 2023);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (8, 3, "YOU", 2020);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (9, 3, "The Fallout", 2021);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (10, 4, "The Summer I Turned Pretty", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (10, 5, "The Summer I Turned Pretty", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (11, 5, "Dailand", 2022);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (12, 6, "Enola Holmes", 2020);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (13, 6, "Stranger Things", 2016);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (14, 6, "Godzilla vs. Kong", 2021);
+INSERT INTO entertainment (movie_id, actor_id, name, released)
+    VALUES  (15, 6, "Enola Holmes 2", 2021);
+
+--Table that displays the movie_id and id number of actors who starred in a picture together. 
+
+CREATE TABLE costars (movie_id INTEGER, actor1 INTEGER, actor2 INTEGER);
+
+INSERT INTO costars (movie_id, actor1, actor2)
+    VALUES (2, 1, 2);
+INSERT INTO costars (movie_id, actor1, actor2)
+    VALUES (10, 4, 5);
+    
+--How many movies/tv shows have each of the actors starred in?
+
+SELECT actors.name, COUNT(entertainment.name) AS total_movies FROM actors
+    JOIN entertainment
+    ON actors.id = entertainment.actor_id
+    GROUP BY actors.name
+    ORDER BY actors.name;
+
+--Join tables to show names of movies, and name of costars.
+
+SELECT entertainment.name AS movie, a.name, b. name FROM costars
+    JOIN entertainment
+    ON costars.movie_id = entertainment.movie_id
+    JOIN actors as a
+    ON costars.actor1 = a.id
+    JOIN actors as b
+    ON costars.actor2 = b.id
+    GROUP BY movie;
+    
