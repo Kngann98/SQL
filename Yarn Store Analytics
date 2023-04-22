@@ -1,4 +1,4 @@
---Yarn store inventory analyis
+#Yarn store inventory analyis
 
 CREATE TABLE yarn (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, color TEXT, weight TEXT, ordered_quantity INTEGER, quantity INTEGER, price INTEGER);
 
@@ -33,18 +33,18 @@ INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price)
 INSERT INTO yarn (name, color, weight, ordered_quantity, quantity, price) 
     VALUES ('bamboo linen', 'pink', 'fine', 1, 6, 3.99);
 
---Show individual items, ordered by price
+#1. Show individual items, ordered by price
 
 SELECT name, color, weight, price 
 FROM yarn 
 ORDER BY price;
 
---What is the highest price of a single skein of yarn?
+#2. What is the highest price of a single skein of yarn?
 
 SELECT MAX(price) 
 FROM yarn;
 
---What yarns need to be ordered to fill shipping requests?
+#3. What yarns need to be ordered to fill shipping requests?
 
 SELECT name, color, weight, quantity-ordered_quantity
 AS yarn_needed 
