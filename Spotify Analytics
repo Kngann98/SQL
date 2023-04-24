@@ -1,0 +1,48 @@
+--For this project, I downloaded Spotify data from Kaggle.
+--Then I created a table to insert Spotify data into.
+--Finally, I performed analytics on the data using SQL. 
+
+CREATE TABLE BIT_DB.Spotifydata(
+id INTEGER PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity INTEGER NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal (4,3) NOT NULL,
+song_key INTEGER NOT NULL,
+loudness decimal (5,3) NOT NULL,
+song_mode INTEGER NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness decimal(8,7) NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL );
+
+--Then I inserted the Spotify Data .csv into the table.
+
+--Next, I explored the data using the following SQL. 
+
+--First I determined the avg popularity, danceability, and energy by artist and track. 
+
+--#1. Select artist name and the number of top 50 songs by artist
+
+SELECT artist_name, COUNT(*) AS total_hits
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY total_hits DESC;
+
+--#2. Based on popularity, what are the top ten songs and artists?
+
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC LIMIT 10;
+
+--#3. What songs on the list are longer than the average duration?
+
+SELECT track_name
+FROM BIT_DB.Spotifydata
+HAVING duration_ms > AVG(duration_ms) ;
