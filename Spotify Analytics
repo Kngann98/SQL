@@ -26,8 +26,6 @@ time_signature integer NOT NULL );
 
 --Next, I explored the data using the following SQL. 
 
---First I determined the avg popularity, danceability, and energy by artist and track. 
-
 --#1. Select artist name and the number of top 50 songs by artist
 
 SELECT artist_name, COUNT(*) AS total_hits
@@ -45,4 +43,12 @@ ORDER BY popularity DESC LIMIT 10;
 
 SELECT track_name
 FROM BIT_DB.Spotifydata
-HAVING duration_ms > AVG(duration_ms) ;
+HAVING duration_ms > AVG(duration_ms);
+
+--#4. First I determined the avg popularity, danceability, and energy by artist and track. 
+
+SELECT AVG(popularity), 
+AVG(danceability), 
+AVG(energy)
+FROM BIT_DB.Spotifydata;
+
